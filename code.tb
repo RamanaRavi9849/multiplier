@@ -1,0 +1,47 @@
+`timescale 1ns / 1ps
+
+module multiplier_tb;
+    reg [31:0] A, B;
+    wire [63:0] P;
+    
+    
+    multiplier uut (
+        .A(A),
+        .B(B),
+        .P(P)
+    );
+    
+    initial begin
+    
+        $monitor("Time = %0t | A = %d, B = %d, P = %d", $time, A, B, P);
+        
+        // Test case 1: 3 * 4
+        A = 32'd3; B = 32'd4;
+        #10;
+        
+        // Test case 2: -5 * 6
+        A = -32'd5; B = 32'd6;
+        #10;
+        
+        // Test case 3: 7 * -8
+        A = 32'd7; B = -32'd8;
+        #10;
+        
+        // Test case 4: -9 * -10
+        A = -32'd9; B = -32'd10;
+        #10;
+        
+        // Test case 5: 0 * 15
+        A = 32'd0; B = 32'd15;
+        #10;
+        
+        // Test case 6: 15 * 0
+        A = 32'd15; B = 32'd0;
+        #10;
+        
+        A = 32'd123456; B = 32'd654321;
+        #10;
+        
+        $finish;
+    end
+endmodule
